@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.0111767, g: 0.9259635, b: 1.1108305, a: 1}
+  m_IndirectSpecularColor: {r: 1.0111729, g: 0.92594826, b: 1.1108247, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2496,14 +2496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 0
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
   m_Intensity: 125
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
@@ -2606,6 +2598,14 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 0
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
 --- !u!1 &164581296
 GameObject:
   m_ObjectHideFlags: 0
@@ -4559,7 +4559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: -17.9, y: 200}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297727332
@@ -4582,7 +4582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Graph Panel
+  m_text: Data Information Panel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4645,7 +4645,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10.316902, y: 0, z: 9.908455, w: 28.363268}
+  m_margin: {x: 0.6945267, y: 0, z: -38.09977, w: 28.363268}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9202,13 +9202,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1767189125}
-  - {fileID: 1188464135}
   - {fileID: 507969592}
-  - {fileID: 1120396158}
-  - {fileID: 246429364}
-  - {fileID: 106835689}
-  - {fileID: 1358072401}
+  - {fileID: 1188464135}
   - {fileID: 172748999}
+  - {fileID: 1358072401}
+  - {fileID: 106835689}
+  - {fileID: 246429364}
+  - {fileID: 1120396158}
   m_Father: {fileID: 2143951938}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9313,7 +9313,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SMC LEJSH63NZA - 800
+  m_text: 'SMC LEJSH63NZA - 1400
+
+    ID: 2'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10255,14 +10257,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1604212274}
-  - {fileID: 1735764221}
   - {fileID: 2068593710}
-  - {fileID: 2047802010}
-  - {fileID: 138581851}
-  - {fileID: 1173464322}
-  - {fileID: 717423385}
-  - {fileID: 1356130983}
+  - {fileID: 1735764221}
   - {fileID: 1304325555}
+  - {fileID: 1356130983}
+  - {fileID: 717423385}
+  - {fileID: 1173464322}
+  - {fileID: 138581851}
+  - {fileID: 2047802010}
   m_Father: {fileID: 2143951938}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14050,14 +14052,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1803689032}
-  - {fileID: 950160560}
   - {fileID: 1490117721}
-  - {fileID: 1260779339}
-  - {fileID: 573544928}
-  - {fileID: 337460101}
-  - {fileID: 258413804}
-  - {fileID: 1613729265}
+  - {fileID: 950160560}
   - {fileID: 1426039591}
+  - {fileID: 1613729265}
+  - {fileID: 258413804}
+  - {fileID: 337460101}
+  - {fileID: 573544928}
+  - {fileID: 1260779339}
   m_Father: {fileID: 2143951938}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18526,7 +18528,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SMC LEJSH63NZA - 800
+  m_text: 'SMC LEJSH63NZA - 1400
+
+    ID: 1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -25223,101 +25227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ef8dc2c2eabfa4e8cb77be57a837c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HDProbeVersion: 3
-  m_ObsoleteInfiniteProjection: 1
-  m_ObsoleteInfluenceVolume:
-    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendDistance: 0
-    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendNormalDistance: 0
-    m_EditorAdvancedModeEnabled: 0
-    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
-    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
-    m_Version: 1
-    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
-    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-    m_Shape: 0
-    m_BoxSize: {x: 10, y: 10, z: 10}
-    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
-    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-    m_SphereRadius: 3
-    m_SphereBlendDistance: 0
-    m_SphereBlendNormalDistance: 0
-  m_ObsoleteFrameSettings:
-    overrides: 0
-    enableShadow: 0
-    enableContactShadows: 0
-    enableShadowMask: 0
-    enableSSR: 0
-    enableSSAO: 0
-    enableSubsurfaceScattering: 0
-    enableTransmission: 0
-    enableAtmosphericScattering: 0
-    enableVolumetrics: 0
-    enableReprojectionForVolumetrics: 0
-    enableLightLayers: 0
-    enableExposureControl: 1
-    diffuseGlobalDimmer: 0
-    specularGlobalDimmer: 0
-    shaderLitMode: 0
-    enableDepthPrepassWithDeferredRendering: 0
-    enableTransparentPrepass: 0
-    enableMotionVectors: 0
-    enableObjectMotionVectors: 0
-    enableDecals: 0
-    enableRoughRefraction: 0
-    enableTransparentPostpass: 0
-    enableDistortion: 0
-    enablePostprocess: 0
-    enableOpaqueObjects: 0
-    enableTransparentObjects: 0
-    enableRealtimePlanarReflection: 0
-    enableMSAA: 0
-    enableAsyncCompute: 0
-    runLightListAsync: 0
-    runSSRAsync: 0
-    runSSAOAsync: 0
-    runContactShadowsAsync: 0
-    runVolumeVoxelizationAsync: 0
-    lightLoopSettings:
-      overrides: 0
-      enableDeferredTileAndCluster: 0
-      enableComputeLightEvaluation: 0
-      enableComputeLightVariants: 0
-      enableComputeMaterialVariants: 0
-      enableFptlForForwardOpaque: 0
-      enableBigTilePrepass: 0
-      isFptlEnabled: 0
-  m_ObsoleteMultiplier: 1
-  m_ObsoleteWeight: 1
-  m_ObsoleteMode: 0
-  m_ObsoleteLightLayers: 1
-  m_ObsoleteCaptureSettings:
-    overrides: 0
-    clearColorMode: 0
-    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
-    clearDepth: 1
-    cullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useOcclusionCulling: 1
-    volumeLayerMask:
-      serializedVersion: 2
-      m_Bits: 1
-    volumeAnchorOverride: {fileID: 0}
-    projection: 0
-    nearClipPlane: 0.3
-    farClipPlane: 1000
-    fieldOfView: 90
-    orthographicSize: 5
-    renderingPath: 0
-    shadowDistance: 100
   m_ProbeSettings:
     frustum:
       fieldOfViewMode: 1
@@ -25335,6 +25244,17 @@ MonoBehaviour:
       fadeDistance: 10000
       rangeCompressionFactor: 1
     influence:
+      m_Shape: 0
+      m_BoxSize: {x: 10, y: 10, z: 10}
+      m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
+      m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
+      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+      m_SphereRadius: 3
+      m_SphereBlendDistance: 0
+      m_SphereBlendNormalDistance: 0
       m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
       m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 1}
       m_EditorSimplifiedModeBlendDistance: 1
@@ -25347,24 +25267,13 @@ MonoBehaviour:
       m_Version: 1
       m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-      m_Shape: 0
-      m_BoxSize: {x: 10, y: 10, z: 10}
-      m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
-      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-      m_SphereRadius: 3
-      m_SphereBlendDistance: 0
-      m_SphereBlendNormalDistance: 0
     proxy:
-      m_CSVersion: 2
-      m_ObsoleteSphereInfiniteProjection: 0
-      m_ObsoleteBoxInfiniteProjection: 0
       m_Shape: 0
       m_BoxSize: {x: 1, y: 1, z: 1}
       m_SphereRadius: 1
+      m_CSVersion: 2
+      m_ObsoleteSphereInfiniteProjection: 0
+      m_ObsoleteBoxInfiniteProjection: 0
     proxySettings:
       useInfluenceVolumeAsProxyVolume: 1
       capturePositionProxySpace: {x: 0, y: 0, z: 0}
@@ -25609,6 +25518,101 @@ MonoBehaviour:
     sh[26]: 0
   m_SHValidForCapturePosition: {x: 0, y: 0, z: 0}
   m_SHValidForSourcePosition: {x: 0, y: 0, z: 0}
+  m_HDProbeVersion: 3
+  m_ObsoleteInfiniteProjection: 1
+  m_ObsoleteInfluenceVolume:
+    m_Shape: 0
+    m_BoxSize: {x: 10, y: 10, z: 10}
+    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
+    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
+    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+    m_SphereRadius: 3
+    m_SphereBlendDistance: 0
+    m_SphereBlendNormalDistance: 0
+    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendDistance: 0
+    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendNormalDistance: 0
+    m_EditorAdvancedModeEnabled: 0
+    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
+    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
+    m_Version: 1
+    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
+    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
+  m_ObsoleteFrameSettings:
+    overrides: 0
+    enableShadow: 0
+    enableContactShadows: 0
+    enableShadowMask: 0
+    enableSSR: 0
+    enableSSAO: 0
+    enableSubsurfaceScattering: 0
+    enableTransmission: 0
+    enableAtmosphericScattering: 0
+    enableVolumetrics: 0
+    enableReprojectionForVolumetrics: 0
+    enableLightLayers: 0
+    enableExposureControl: 1
+    diffuseGlobalDimmer: 0
+    specularGlobalDimmer: 0
+    shaderLitMode: 0
+    enableDepthPrepassWithDeferredRendering: 0
+    enableTransparentPrepass: 0
+    enableMotionVectors: 0
+    enableObjectMotionVectors: 0
+    enableDecals: 0
+    enableRoughRefraction: 0
+    enableTransparentPostpass: 0
+    enableDistortion: 0
+    enablePostprocess: 0
+    enableOpaqueObjects: 0
+    enableTransparentObjects: 0
+    enableRealtimePlanarReflection: 0
+    enableMSAA: 0
+    enableAsyncCompute: 0
+    runLightListAsync: 0
+    runSSRAsync: 0
+    runSSAOAsync: 0
+    runContactShadowsAsync: 0
+    runVolumeVoxelizationAsync: 0
+    lightLoopSettings:
+      overrides: 0
+      enableDeferredTileAndCluster: 0
+      enableComputeLightEvaluation: 0
+      enableComputeLightVariants: 0
+      enableComputeMaterialVariants: 0
+      enableFptlForForwardOpaque: 0
+      enableBigTilePrepass: 0
+      isFptlEnabled: 0
+  m_ObsoleteMultiplier: 1
+  m_ObsoleteWeight: 1
+  m_ObsoleteMode: 0
+  m_ObsoleteLightLayers: 1
+  m_ObsoleteCaptureSettings:
+    overrides: 0
+    clearColorMode: 0
+    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
+    clearDepth: 1
+    cullingMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useOcclusionCulling: 1
+    volumeLayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    volumeAnchorOverride: {fileID: 0}
+    projection: 0
+    nearClipPlane: 0.3
+    farClipPlane: 1000
+    fieldOfView: 90
+    orthographicSize: 5
+    renderingPath: 0
+    shadowDistance: 100
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
   m_ObsoleteInfluenceSphereRadius: 3
@@ -25955,11 +25959,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1284526734}
-  - {fileID: 986489952}
-  - {fileID: 609521597}
-  - {fileID: 1433114785}
-  - {fileID: 839489495}
   - {fileID: 629752858}
+  - {fileID: 839489495}
+  - {fileID: 986489952}
+  - {fileID: 1433114785}
+  - {fileID: 609521597}
   m_Father: {fileID: 2143951938}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27537,53 +27541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 9
-  m_ObsoleteRenderingPath: 0
-  m_ObsoleteFrameSettings:
-    overrides: 0
-    enableShadow: 0
-    enableContactShadows: 0
-    enableShadowMask: 0
-    enableSSR: 0
-    enableSSAO: 0
-    enableSubsurfaceScattering: 0
-    enableTransmission: 0
-    enableAtmosphericScattering: 0
-    enableVolumetrics: 0
-    enableReprojectionForVolumetrics: 0
-    enableLightLayers: 0
-    enableExposureControl: 1
-    diffuseGlobalDimmer: 0
-    specularGlobalDimmer: 0
-    shaderLitMode: 0
-    enableDepthPrepassWithDeferredRendering: 0
-    enableTransparentPrepass: 0
-    enableMotionVectors: 0
-    enableObjectMotionVectors: 0
-    enableDecals: 0
-    enableRoughRefraction: 0
-    enableTransparentPostpass: 0
-    enableDistortion: 0
-    enablePostprocess: 0
-    enableOpaqueObjects: 0
-    enableTransparentObjects: 0
-    enableRealtimePlanarReflection: 0
-    enableMSAA: 0
-    enableAsyncCompute: 0
-    runLightListAsync: 0
-    runSSRAsync: 0
-    runSSAOAsync: 0
-    runContactShadowsAsync: 0
-    runVolumeVoxelizationAsync: 0
-    lightLoopSettings:
-      overrides: 0
-      enableDeferredTileAndCluster: 0
-      enableComputeLightEvaluation: 0
-      enableComputeLightVariants: 0
-      enableComputeMaterialVariants: 0
-      enableFptlForForwardOpaque: 0
-      enableBigTilePrepass: 0
-      isFptlEnabled: 0
   clearColorMode: 0
   backgroundColorHDR: {r: 0, g: 0, b: 0, a: 1}
   clearDepth: 1
@@ -27654,6 +27611,53 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+  m_Version: 9
+  m_ObsoleteRenderingPath: 0
+  m_ObsoleteFrameSettings:
+    overrides: 0
+    enableShadow: 0
+    enableContactShadows: 0
+    enableShadowMask: 0
+    enableSSR: 0
+    enableSSAO: 0
+    enableSubsurfaceScattering: 0
+    enableTransmission: 0
+    enableAtmosphericScattering: 0
+    enableVolumetrics: 0
+    enableReprojectionForVolumetrics: 0
+    enableLightLayers: 0
+    enableExposureControl: 1
+    diffuseGlobalDimmer: 0
+    specularGlobalDimmer: 0
+    shaderLitMode: 0
+    enableDepthPrepassWithDeferredRendering: 0
+    enableTransparentPrepass: 0
+    enableMotionVectors: 0
+    enableObjectMotionVectors: 0
+    enableDecals: 0
+    enableRoughRefraction: 0
+    enableTransparentPostpass: 0
+    enableDistortion: 0
+    enablePostprocess: 0
+    enableOpaqueObjects: 0
+    enableTransparentObjects: 0
+    enableRealtimePlanarReflection: 0
+    enableMSAA: 0
+    enableAsyncCompute: 0
+    runLightListAsync: 0
+    runSSRAsync: 0
+    runSSAOAsync: 0
+    runContactShadowsAsync: 0
+    runVolumeVoxelizationAsync: 0
+    lightLoopSettings:
+      overrides: 0
+      enableDeferredTileAndCluster: 0
+      enableComputeLightEvaluation: 0
+      enableComputeLightVariants: 0
+      enableComputeMaterialVariants: 0
+      enableFptlForForwardOpaque: 0
+      enableBigTilePrepass: 0
+      isFptlEnabled: 0
 --- !u!1 &1831314143
 GameObject:
   m_ObjectHideFlags: 0
@@ -32949,7 +32953,7 @@ GameObject:
   - component: {fileID: 2143951940}
   - component: {fileID: 2143951939}
   m_Layer: 0
-  m_Name: Graph_Panel
+  m_Name: Data_Info_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57273,7 +57277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76f36d650569aad085af2ebb6cfcabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ip_Address_IF: {fileID: 1701941865}
+  Ip_Address_IF_Txt: {fileID: 1701941865}
   Connection_Info_Img: {fileID: 8793931640044061882}
   Graph_Panel_Img: {fileID: 2143951939}
   ABB_IRB_120_L_Ax_Toggle:
@@ -57295,6 +57299,33 @@ MonoBehaviour:
   ABB_IRB_14000_Obj: {fileID: 3587827978432160388}
   SMC_LEFB25_14000: {fileID: 2337730324671831206}
   Connection_Info_Txt: {fileID: 8793931639701857263}
+  SMC_LEFB25_14000_Txt:
+  - {fileID: 2057373698}
+  - {fileID: 850308697}
+  ABB_IRB_120_L_Ax_Txt:
+  - {fileID: 1159842291}
+  - {fileID: 1987443550}
+  - {fileID: 1996012027}
+  - {fileID: 1019095566}
+  - {fileID: 485780941}
+  - {fileID: 781436142}
+  - {fileID: 497551117}
+  ABB_IRB_14000_L_Txt:
+  - {fileID: 1361709777}
+  - {fileID: 861999071}
+  - {fileID: 1150432173}
+  - {fileID: 1324178484}
+  - {fileID: 694783502}
+  - {fileID: 895806588}
+  - {fileID: 208094753}
+  ABB_IRB_14000_R_Txt:
+  - {fileID: 457465854}
+  - {fileID: 1338756400}
+  - {fileID: 511036747}
+  - {fileID: 1271166428}
+  - {fileID: 1927436092}
+  - {fileID: 643771931}
+  - {fileID: 1334970653}
 --- !u!1 &8793931638518549169
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,14 +8,26 @@ using UnityEngine.UI;
 // TM 
 using TMPro;
 
+using static OPC_UA_Client;
+
 public class User_Interface : MonoBehaviour
 {
+    /*
+    Description:
+        Global variables.
+    */
+    public static class GlobalVariables_UI
+    {
+        public static bool Connect, Disconnect;
+        public static string Ip_Address;
+    }
+
     /*
     Description:
         Public variables.
     */
     // TMP_InputField 
-    public TMP_InputField Ip_Address_IF;
+    public TMP_InputField Ip_Address_IF_Txt;
     // Image
     public Image Connection_Info_Img; public Image Graph_Panel_Img;
     // Toggle
@@ -29,6 +41,10 @@ public class User_Interface : MonoBehaviour
     public GameObject SMC_LEFB25_14000;
     // TextMeshProUGUI
     public TextMeshProUGUI Connection_Info_Txt;
+    public TextMeshProUGUI[] SMC_LEFB25_14000_Txt = new TextMeshProUGUI[2];
+    public TextMeshProUGUI[] ABB_IRB_120_L_Ax_Txt = new TextMeshProUGUI[7];
+    public TextMeshProUGUI[] ABB_IRB_14000_L_Txt = new TextMeshProUGUI[7];
+    public TextMeshProUGUI[] ABB_IRB_14000_R_Txt = new TextMeshProUGUI[7];
 
     /*
     Description:
@@ -52,6 +68,8 @@ public class User_Interface : MonoBehaviour
         Connection_Info_Img.GetComponent<Image>().color = new Color32(255, 0, 48, 50);
         // Connection information: Connected / Disconnected
         Connection_Info_Txt.text = "Disconnected";
+        // OPC UA Server IP Address
+        Ip_Address_IF_Txt.text = "127.0.0.1";
 
         // Graph panel initialization
         Graph_Panel_Img.transform.localPosition = new Vector3(-(422.5f + 1000.0f), 0.0f, 0.0f);
@@ -69,8 +87,13 @@ public class User_Interface : MonoBehaviour
             }
         }
 
-        // OPC UA Server IP Address
-        Ip_Address_IF.text = "127.0.0.1";
+        // Data Information about the robot/mechanism's joint positions within a specific panel.
+        SMC_LEFB25_14000_Txt[0].text = "0.0"; SMC_LEFB25_14000_Txt[1].text = "0.0";
+        for(int i = 0; i < ABB_IRB_120_L_Ax_Txt.Length; i++) 
+        {
+            ABB_IRB_120_L_Ax_Txt[i].text = "0.0"; ABB_IRB_14000_L_Txt[i].text = "0.0";
+            ABB_IRB_14000_R_Txt[i].text = "0.0";
+        }
     }
 
     /*
@@ -79,6 +102,21 @@ public class User_Interface : MonoBehaviour
     */
     void Update()
     {
+        GlobalVariables_UI.Ip_Address = Ip_Address_IF_Txt.text;
+
+        // Connection Information:
+        //  If the connection to the OPC UA server is successfully established, change the connection information
+        if (OPC_UA_Client.GlobalVariables_OPC_UA.Is_Connected == true)
+        {
+            Connection_Info_Img.GetComponent<Image>().color = new Color32(135, 255, 0, 50);
+            Connection_Info_Txt.text = "Connected";
+        }
+        else
+        {
+            Connection_Info_Img.GetComponent<Image>().color = new Color32(255, 0, 48, 50);
+            Connection_Info_Txt.text = "Disconnected";
+        }
+
         // Mechanism: SMC LEFB25UNZS 14000C
         Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Viewpoint_EE_" + SMC_LEFB25_14000.name + "_ID_001").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
         Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Viewpoint_EE_" + SMC_LEFB25_14000.name + "_ID_002").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
@@ -183,10 +221,12 @@ public class User_Interface : MonoBehaviour
 
     public void TaskOnClick_Connect_Btn()
     {
+        GlobalVariables_UI.Disconnect = false; GlobalVariables_UI.Connect = true;
     }
 
     public void TaskOnClick_Disconnect_Btn()
     {
+        GlobalVariables_UI.Connect = false; GlobalVariables_UI.Disconnect = true;
     }
 
     public void TaskOnClick_Fly_Btn()
