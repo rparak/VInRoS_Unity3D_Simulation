@@ -25,11 +25,14 @@ public class SMC_LEFB25_14000 : MonoBehaviour
         public static bool[] In_Position = new bool[2];
     }
 
+    public float[] Q_target_tmp = new float[2];
+
     /*
     Description:
         Private variables.
     */
     private readonly float[] Q_home = new float[2] {700.0f, 700.0f};
+    private readonly float[,] Q_limit = new float[2,2] {{0.0f, 1400.0f}, {0.0f, 1400.0f}};
 
     /*
     Description:
@@ -37,7 +40,13 @@ public class SMC_LEFB25_14000 : MonoBehaviour
     */
     void Start()
     {
-        G_SMC_LEFB25_14000_Str.Q_target = G_SMC_LEFB25_14000_Str.Q_actual = Q_home;
+        // Set the actual position and the target position to the home position.
+        var i = 0;
+        foreach(float Q_home_i in Q_home){
+            G_SMC_LEFB25_14000_Str.Q_target[i] = Q_home_i;
+            G_SMC_LEFB25_14000_Str.Q_actual[i] = Q_home_i;
+            i++;
+        }
     }
 
     /*
@@ -46,6 +55,26 @@ public class SMC_LEFB25_14000 : MonoBehaviour
     */
     void Update()
     {
-        
+        // Check that the desired absolute joint positions are not out of limit.
+        for(int i = 0; i < G_SMC_LEFB25_14000_Str.Q_target.Length; i++) 
+        {
+            G_SMC_LEFB25_14000_Str.Q_target[i] = Mathf.Clamp(Q_target_tmp[i], Q_limit[i, 0], Q_limit[i, 1]);
+        }
+    }
+
+    /*
+    Description:
+        Help functions for the control.
+    */
+    void OnApplicationQuit()
+    {
+        try
+        {
+            Destroy(this);
+        }
+        catch(Exception e)
+        {
+            Debug.LogException(e);
+        }
     }
 }

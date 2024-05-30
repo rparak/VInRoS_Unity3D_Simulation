@@ -47,7 +47,7 @@ public class Mech_ID_1_Prismatic_Joint_Control : MonoBehaviour
     void Update()
     {
         // Smooth movement of the current mechanism position to the target position.
-        SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_target[index] = Mathf.SmoothDamp(SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[index], 
+        SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[index] = Mathf.SmoothDamp(SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[index], 
                                                                                    SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_target[index], 
                                                                                    ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
         if(Mathf.Abs(SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_target[index] - SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[index]) < tolerance){
@@ -57,7 +57,7 @@ public class Mech_ID_1_Prismatic_Joint_Control : MonoBehaviour
             SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.In_Position[index] = false;
         }
 
-        transform.localPosition = new Vector3(Q_0[0], SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[index]*conversion_value, Q_0[2]);
+        transform.localPosition = new Vector3(Q_0[0], Q_0[1] + SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[index]*conversion_value, Q_0[2]);
     }
 
     /*

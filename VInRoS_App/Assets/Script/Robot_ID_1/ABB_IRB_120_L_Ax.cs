@@ -36,6 +36,8 @@ public class ABB_IRB_120_L_Ax : MonoBehaviour
         Private variables.
     */
     private readonly float[] Q_home = new float[7] {400.0f, 90.0f, 0.0f, 0.0f, 0.0f, 90.0f, 0.0f};
+    private readonly float[,] Q_limit = new float[7,2] {{0.0f, 800.0f}, {-165.0f, 165.0f}, {-110.0f, 110.0f}, {-110.0f, 70.0f},
+                                                        {-160.0f, 160.0f}, {-120.0f, 120.0f}, {-400.0f, 400.0f}};
 
     /*
     Description:
@@ -43,7 +45,13 @@ public class ABB_IRB_120_L_Ax : MonoBehaviour
     */
     void Start()
     {
-        G_ABB_IRB_120_L_Ax_Str.Q_target = G_ABB_IRB_120_L_Ax_Str.Q_actual = Q_home;
+        // Set the actual position and the target position to the home position.
+        var i = 0;
+        foreach(float Q_home_i in Q_home){
+            G_ABB_IRB_120_L_Ax_Str.Q_target[i] = Q_home_i;
+            G_ABB_IRB_120_L_Ax_Str.Q_actual[i] = Q_home_i;
+            i++;
+        }
     }
 
     /*
@@ -52,6 +60,22 @@ public class ABB_IRB_120_L_Ax : MonoBehaviour
     */
     void Update()
     {
-        
+
+    }
+
+    /*
+    Description:
+        Help functions for the control.
+    */
+    void OnApplicationQuit()
+    {
+        try
+        {
+            Destroy(this);
+        }
+        catch(Exception e)
+        {
+            Debug.LogException(e);
+        }
     }
 }
