@@ -18,7 +18,7 @@ public class OPC_UA_Client : MonoBehaviour
     Description:
         Global variables.
     */
-    public static class GlobalVariables_OPC_UA
+    public static class G_OPC_UA_Client_Str
     {
         public static bool Is_Connected;
     }

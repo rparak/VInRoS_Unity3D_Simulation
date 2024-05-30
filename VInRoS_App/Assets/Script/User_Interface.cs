@@ -16,7 +16,7 @@ public class User_Interface : MonoBehaviour
     Description:
         Global variables.
     */
-    public static class GlobalVariables_UI
+    public static class G_UI_Str
     {
         public static bool Connect, Disconnect;
         public static string Ip_Address;
@@ -66,19 +66,19 @@ public class User_Interface : MonoBehaviour
         //      Connected: Green Color <135, 255, 0, 50>
         //      Disconnected: Red Color <255, 0, 48, 50>
         Connection_Info_Img.GetComponent<Image>().color = new Color32(255, 0, 48, 50);
-        // Connection information: Connected / Disconnected
+        // Connection information: Connected / Disconnected.
         Connection_Info_Txt.text = "Disconnected";
-        // OPC UA Server IP Address
+        // OPC UA Server IP Address.
         Ip_Address_IF_Txt.text = "127.0.0.1";
 
-        // Graph panel initialization
+        // Graph panel initialization.
         Graph_Panel_Img.transform.localPosition = new Vector3(-(422.5f + 1000.0f), 0.0f, 0.0f);
 
-        // Main camera initialization
+        // Main camera initialization.
         Camera_Obj.transform.localPosition = new Vector3(-2.85f, 1.6f, -1.25f);
         Camera_Obj.transform.localEulerAngles = new Vector3(15f, 80f, 0f);
 
-        // Turn off user interface Toggles
+        // Turn off user interface Toggles.
         for(int i = 0; i < ABB_IRB_120_L_Ax_Toggle.Length; i++) 
         {
             ABB_IRB_120_L_Ax_Toggle[i].isOn = false; ABB_IRB_14000_Toggle[i].isOn = false;
@@ -102,11 +102,11 @@ public class User_Interface : MonoBehaviour
     */
     void Update()
     {
-        GlobalVariables_UI.Ip_Address = Ip_Address_IF_Txt.text;
+        G_UI_Str.Ip_Address = Ip_Address_IF_Txt.text;
 
         // Connection Information:
-        //  If the connection to the OPC UA server is successfully established, change the connection information
-        if (OPC_UA_Client.GlobalVariables_OPC_UA.Is_Connected == true)
+        //  If the connection to the OPC UA server is successfully established, change the connection information.
+        if (OPC_UA_Client.G_OPC_UA_Client_Str.Is_Connected == true)
         {
             Connection_Info_Img.GetComponent<Image>().color = new Color32(135, 255, 0, 50);
             Connection_Info_Txt.text = "Connected";
@@ -117,7 +117,7 @@ public class User_Interface : MonoBehaviour
             Connection_Info_Txt.text = "Disconnected";
         }
 
-        // Mechanism: SMC LEFB25UNZS 14000C
+        // Mechanism: SMC LEFB25UNZS 14000C.
         Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Viewpoint_EE_" + SMC_LEFB25_14000.name + "_ID_001").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
         Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Viewpoint_EE_" + SMC_LEFB25_14000.name + "_ID_002").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
         string[] mechanism_object_types = {"Collider", "Ghost"}; int[] mechanism_id = {1, 2};
@@ -133,7 +133,7 @@ public class User_Interface : MonoBehaviour
             i++;
         }
  
-        // Industrial Robotic Arm: ABB IRB 120 with SMC Linear Axis (LEJSH63NZA 800)
+        // Industrial Robotic Arm: ABB IRB 120 with SMC Linear Axis (LEJSH63NZA 800).
         Get_Child_Game_Object(ABB_IRB_120_L_Ax_Obj.transform, "Viewpoint_EE_" + ABB_IRB_120_L_Ax_Obj.name + "_ID_001").SetActive(ABB_IRB_120_L_Ax_Toggle[0].isOn);
         Get_Child_Game_Object(ABB_IRB_120_L_Ax_Obj.transform, "Base_Collider_" + ABB_IRB_120_L_Ax_Obj.name + "_ID_001").SetActive(ABB_IRB_120_L_Ax_Toggle[1].isOn);
         Get_Child_Game_Object(ABB_IRB_120_L_Ax_Obj.transform, "Base_1_Collider_" + ABB_IRB_120_L_Ax_Obj.name + "_ID_001").SetActive(ABB_IRB_120_L_Ax_Toggle[1].isOn);
@@ -146,7 +146,7 @@ public class User_Interface : MonoBehaviour
         }
         Get_Child_Game_Object(ABB_IRB_120_L_Ax_Obj.transform, "Workspace_" + ABB_IRB_120_L_Ax_Obj.name + "_ID_001").SetActive(ABB_IRB_120_L_Ax_Toggle[3].isOn);
 
-        // Collaborative Robotic Arm: ABB IRB 14000
+        // Collaborative Robotic Arm: ABB IRB 14000.
         Get_Child_Game_Object(ABB_IRB_14000_Obj.transform, "Viewpoint_EE_" + ABB_IRB_14000_Obj.name + "_R_ID_001").SetActive(ABB_IRB_14000_Toggle[0].isOn);
         Get_Child_Game_Object(ABB_IRB_14000_Obj.transform, "Viewpoint_EE_" + ABB_IRB_14000_Obj.name + "_L_ID_001").SetActive(ABB_IRB_14000_Toggle[0].isOn);
         Get_Child_Game_Object(ABB_IRB_14000_Obj.transform, "Base_Collider_ID_1_" + ABB_IRB_14000_Obj.name + "_ID_001").SetActive(ABB_IRB_14000_Toggle[1].isOn);
@@ -170,7 +170,7 @@ public class User_Interface : MonoBehaviour
 
     /*
     Description:
-        Help functions for user interface control.
+        Help functions for the user interface control.
     */
     void OnApplicationQuit()
     {
@@ -221,12 +221,12 @@ public class User_Interface : MonoBehaviour
 
     public void TaskOnClick_Connect_Btn()
     {
-        GlobalVariables_UI.Disconnect = false; GlobalVariables_UI.Connect = true;
+        G_UI_Str.Disconnect = false; G_UI_Str.Connect = true;
     }
 
     public void TaskOnClick_Disconnect_Btn()
     {
-        GlobalVariables_UI.Connect = false; GlobalVariables_UI.Disconnect = true;
+        G_UI_Str.Connect = false; G_UI_Str.Disconnect = true;
     }
 
     public void TaskOnClick_Fly_Btn()
