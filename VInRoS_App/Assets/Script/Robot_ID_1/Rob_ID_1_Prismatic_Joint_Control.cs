@@ -37,7 +37,7 @@ public class Rob_ID_1_Prismatic_Joint_Control : MonoBehaviour
     */
     void Start()
     {
-        Q_0 = transform.localPosition;
+        Q_0 = transform.localPosition; ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = false;
     }
 
     /*
@@ -50,7 +50,7 @@ public class Rob_ID_1_Prismatic_Joint_Control : MonoBehaviour
         ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index] = Mathf.SmoothDamp(ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index], 
                                                                                    ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index], 
                                                                                    ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
-        if(Mathf.Abs(ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index] - ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index]) < tolerance){
+        if(Mathf.Abs(ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index] - ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index]) <= tolerance){
             ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index] = ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index]; v = 0.0f;
             ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = true;
         }else{
