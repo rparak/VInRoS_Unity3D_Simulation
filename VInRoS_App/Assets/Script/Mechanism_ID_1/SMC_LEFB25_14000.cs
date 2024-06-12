@@ -5,6 +5,8 @@ using System.Text;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
+using static OPC_UA_Client;
+
 /*
 Description:
     Mechanism Type - SMC LEFB25UNZS 14000C
@@ -16,7 +18,7 @@ public class SMC_LEFB25_14000 : MonoBehaviour
 {
     /*
     Description:
-        Global variables.
+        Structures, enumerations, etc.
     */
     public static class G_SMC_LEFB25_14000_Str
     {
@@ -25,17 +27,27 @@ public class SMC_LEFB25_14000 : MonoBehaviour
         public static bool[] In_Position = new bool[2];
     }
 
-    public enum SMC_STATE_Enum
+    public enum SMC_LEFB25_14000_STATE_Enum
     {
-        INIT = 0,
-        WAIT = 10,
-        HOME_1 = 20,
-        HOME_2 = 21,
-        MOVE_1 = 30,
-        MOVE_2 = 31,
-        MOVE_3 = 32,
+        INIT         = 0,
+        WAIT_COMMAND = 10,
+        HOME_INIT    = 20,
+        HOME_PERFORM = 21,
+        MOVE_CHECK   = 30,
+        MOVE_INIT    = 31,
+        MOVE_PERFORM = 32,
     }
 
+    /*
+    Description:
+        Global variables.
+    */
+    private SMC_LEFB25_14000_STATE_Enum state_id_mech_1;
+    private SMC_LEFB25_14000_STATE_Enum state_id_mech_2; 
+    private int mech_1_trajectory_index = 0;
+    private int mech_2_trajectory_index = 0;
+
+    /*
     public float[] Q_target_tmp = new float[2];
     public bool start; public bool stop; public bool home;
     public SMC_STATE_Enum state_id;
@@ -45,6 +57,7 @@ public class SMC_LEFB25_14000 : MonoBehaviour
                                              {200.0f, 200.0f},
                                              {1000.0f, 1000.0f},
                                              {1400.0f, 1400.0f}};
+    */
 
     /*
     Description:
@@ -68,8 +81,8 @@ public class SMC_LEFB25_14000 : MonoBehaviour
             i++;
         }
 
-        state_id = SMC_STATE_Enum.WAIT;
-        traj_index = 0;
+        state_id_mech_1 = SMC_LEFB25_14000_STATE_Enum.INIT;
+        state_id_mech_2 = SMC_LEFB25_14000_STATE_Enum.INIT;
     }
 
     /*
@@ -78,6 +91,74 @@ public class SMC_LEFB25_14000 : MonoBehaviour
     */
     void Update()
     {
+        /*
+        Description:
+            A state machine used to control a mechanism with identification number 1 (blue shuttle).
+        */
+        switch(state_id_mech_1){
+            case SMC_LEFB25_14000_STATE_Enum.INIT:
+            {
+                if(OPC_UA_Client.G_OPC_UA_Client_Str.Is_Connected == true){
+                    state_id_mech_1 = SMC_LEFB25_14000_STATE_Enum.WAIT_COMMAND;
+                }
+            }
+            break;
+
+            case SMC_LEFB25_14000_STATE_Enum.WAIT_COMMAND:
+            {
+                if(OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[0] == true){
+                    state_id_mech_1 = SMC_LEFB25_14000_STATE_Enum.HOME_INIT;
+                }
+
+                if(OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start[0] == true){
+                    state_id_mech_1 = SMC_LEFB25_14000_STATE_Enum.HOME_INIT;
+                }
+            }
+            break;
+
+            case SMC_LEFB25_14000_STATE_Enum.HOME_INIT:
+            {
+                OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[0] = false;
+
+                // Set the target position of the mechanism to the home position.
+                //  Note:
+                //      Check that the desired absolute joint positions are not out of limit.
+                G_SMC_LEFB25_14000_Str.Q_target[0] = Mathf.Clamp(Q_home[0], Q_limit[0, 0], Q_limit[0, 1]);
+
+                state_id_mech_1 = SMC_LEFB25_14000_STATE_Enum.HOME_PERFORM;
+            }
+            break;
+
+            case SMC_LEFB25_14000_STATE_Enum.HOME_PERFORM:
+            {
+                if(G_SMC_LEFB25_14000_Str.In_Position[0] == true){
+                    state_id_mech_1 = SMC_LEFB25_14000_STATE_Enum.WAIT_COMMAND;
+                }
+            }
+            break;
+
+            case SMC_LEFB25_14000_STATE_Enum.MOVE_CHECK:
+            {
+
+            }
+            break;
+
+            case SMC_LEFB25_14000_STATE_Enum.MOVE_INIT:
+            {
+
+            }
+            break;
+
+            case SMC_LEFB25_14000_STATE_Enum.MOVE_PERFORM:
+            {
+
+            }
+            break;
+        }
+
+
+
+        /*
         switch(state_id){
             case SMC_STATE_Enum.INIT:
             {
@@ -156,6 +237,7 @@ public class SMC_LEFB25_14000 : MonoBehaviour
             }
             break;
         }
+        */
     }
 
     /*

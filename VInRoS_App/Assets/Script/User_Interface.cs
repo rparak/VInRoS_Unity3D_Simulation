@@ -14,7 +14,7 @@ public class User_Interface : MonoBehaviour
 {
     /*
     Description:
-        Global variables.
+        Structures, enumerations, etc.
     */
     public static class G_UI_Str
     {

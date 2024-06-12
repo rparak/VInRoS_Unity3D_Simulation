@@ -22,7 +22,7 @@ public class ABB_IRB_14000_R : MonoBehaviour
 {
     /*
     Description:
-        Global variables.
+        Structures, enumerations, etc.
     */
     public static class G_ABB_IRB_14000_R_Str
     {

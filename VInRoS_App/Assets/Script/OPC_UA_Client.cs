@@ -13,27 +13,109 @@ using Opc.Ua.Configuration;
 
 using static User_Interface;
 
+/*
+Description:
+    A simple demonstration of node identification within B&R Automation.
+        node_id = "ns=6;s=::Task:Var"
+
+        Note:
+            <ns>   = All variables use the number 6.
+            <Task> = The name of the program (task).
+                        Note:
+                            If the variable is global, the task name is AsGlobalPV.
+            <Var>  = The name of the variable to be processed.
+*/
+
 public class OPC_UA_Client : MonoBehaviour
 {
     /*
     Description:
-        Global variables.
+        Structures, enumerations, etc.
     */
+    public enum OPC_UA_Client_STATE_Enum
+    {
+        DISCONNECTED = 0,
+        CONNECTED = 10
+    }
+
     public static class G_OPC_UA_Client_Str
     {
         public static bool Is_Connected;
-        // Client settings.
-        //  Network IP Address.
+
+        /*
+        Description:
+            Client settings.
+        */
         public static string Ip_Address;
-        //  Network Port Number.
+        // OPC UA port number for communication.
         public const ushort port_number = 4840;
-        //  Communication speed in milliseconds.
+        // Communication speed in milliseconds.
         public static int time_step;
     }
 
+    public static class G_OPC_UA_Client_General_Data_Str
+    {
+        /*
+        Description:
+            Variables used to read data from the client.
+        */
+        public static NodeId Simulation_Enabled_Node = "ns=6;s=::AsGlobalPV:SIMULATION_ENABLE";
+        public static bool Simulation_Enabled;
+    }
+
+    public static class G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str
+    {
+        /*
+        Description:
+            Variables used to read data from the client.
+
+            Note:
+                Use node as the NodeId data type.
+
+            The process used to read the data requires a variable that corresponds 
+            to the data type used in the OPC UA server.
+        */
+
+        public static NodeId[] Start_Node = new NodeId[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Command.Start",
+                                                          "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Command.Start"};
+        public static bool[] Start = new bool[2];
+        public static NodeId[] Stop_Node = new NodeId[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Command.Stop",
+                                                         "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Command.Stop"};
+        public static bool[] Stop = new bool[2];
+        public static NodeId[] Home_Node = new NodeId[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Command.Home",
+                                                         "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Command.Home"};
+        public static bool[] Home = new bool[2];
+        public static NodeId[] Trajectory_Node = new NodeId[2]{"ns=6;s=::T_MECH_1.Trajectory_Str.Targets.Position",
+                                                               "ns=6;s=::T_MECH_2.Trajectory_Str.Targets.Position"};
+        public static float[,] Trajectory = new float[100,2];
+        public static NodeId[] Trajectory_Length_Node = new NodeId[2]{"ns=6;s=::T_MECH_1.Trajectory_Str.Length",
+                                                                      "ns=6;s=::T_MECH_2.Trajectory_Str.Length"};
+        public static byte Trajectory_Length;
+
+        /*
+        Description:
+            Variables used to write data to the client.
+
+            Note:
+                Use node as a string data type.
+        */
+        public static string[] Q_actual_Node = new string[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Position",
+                                                             "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Position"};
+    }
+
+    /*
+    Description:
+        Global variables.
+    */
+    private OPC_UA_Client_STATE_Enum state_id;
+
     // Initialization of classes that will read and write data via OPC UA communication.
-    private OPC_Ua_Client_Read_Data_Cls OPC_Ua_Client_R_Cls = new OPC_Ua_Client_Read_Data_Cls();
-    private OPC_Ua_Client_Write_Data_Cls OPC_Ua_Client_W_Cls = new OPC_Ua_Client_Write_Data_Cls();
+    private OPC_UA_Client_Read_Data_Cls OPC_UA_Client_R_Cls = new OPC_UA_Client_Read_Data_Cls();
+    private OPC_UA_Client_Write_Data_Cls OPC_UA_Client_W_Cls = new OPC_UA_Client_Write_Data_Cls();
+
+    // Information about whether the thread is alive or not.
+    public static bool opc_ua_client_r_is_alive = false; 
+    public static bool opc_ua_client_w_is_alive = false;
 
     /*
     Description:
@@ -62,7 +144,35 @@ public class OPC_UA_Client : MonoBehaviour
     */
     void Update()
     {
-        
+        switch(state_id){
+            case OPC_UA_Client_STATE_Enum.DISCONNECTED:
+            {
+                G_OPC_UA_Client_Str.Is_Connected = false;
+                if(User_Interface.G_UI_Str.Connect == true){
+                    OPC_UA_Client_R_Cls.Start(); OPC_UA_Client_W_Cls.Start();
+                    state_id = OPC_UA_Client_STATE_Enum.CONNECTED;
+                }
+            }
+            break;
+
+            case OPC_UA_Client_STATE_Enum.CONNECTED:
+            {
+                G_OPC_UA_Client_Str.Is_Connected = true;
+                if(User_Interface.G_UI_Str.Disconnect == true){
+                    if(opc_ua_client_r_is_alive == true){
+                        OPC_UA_Client_R_Cls.Stop();
+                    }
+                    if(opc_ua_client_w_is_alive == true){
+                        OPC_UA_Client_W_Cls.Stop();
+                    }
+
+                    if(opc_ua_client_r_is_alive == false && opc_ua_client_w_is_alive == false){
+                        state_id = OPC_UA_Client_STATE_Enum.DISCONNECTED;
+                    }
+                }
+            }
+            break;
+        }
     }
 
     /*
@@ -74,7 +184,7 @@ public class OPC_UA_Client : MonoBehaviour
         try
         {
             // Destroy the threads used to read and write data via OPC UA communication.
-            // {Cls_Name}.Destroy();
+            OPC_UA_Client_R_Cls.Destroy(); OPC_UA_Client_W_Cls.Destroy();
 
             Destroy(this);
         }
@@ -91,18 +201,18 @@ public class OPC_UA_Client : MonoBehaviour
 
     public static ApplicationConfiguration OPC_UA_Client_Configuration()
     {
-        // Configuration OPCUa Client {W/R -> Data}
+        // Configuration OPCUA Client {W/R -> Data}
         var config = new ApplicationConfiguration()
         {
             // Initialization (Name, Uri, etc.)
-            ApplicationName = "OPCUa_AS", // OPCUa AS (Automation Studio B&R)
-            ApplicationUri = Utils.Format(@"urn:{0}:OPCUa_AS", System.Net.Dns.GetHostName()),
+            ApplicationName = "OPCUA_AS", // OPCUA AS (Automation Studio B&R)
+            ApplicationUri = Utils.Format(@"urn:{0}:OPCUA_AS", System.Net.Dns.GetHostName()),
             // Type -> Client
             ApplicationType = ApplicationType.Client,
             SecurityConfiguration = new SecurityConfiguration
             {
                 // Security Configuration - Certificate
-                ApplicationCertificate = new CertificateIdentifier { StoreType = @"Directory", StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\MachineDefault", SubjectName = Utils.Format(@"CN={0}, DC={1}", "OPCUa_AS", System.Net.Dns.GetHostName()) },
+                ApplicationCertificate = new CertificateIdentifier { StoreType = @"Directory", StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\MachineDefault", SubjectName = Utils.Format(@"CN={0}, DC={1}", "OPCUA_AS", System.Net.Dns.GetHostName()) },
                 TrustedIssuerCertificates = new CertificateTrustList { StoreType = @"Directory", StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Certificate Authorities" },
                 TrustedPeerCertificates = new CertificateTrustList { StoreType = @"Directory", StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\UA Applications" },
                 RejectedCertificateStore = new CertificateTrustList { StoreType = @"Directory", StorePath = @"%CommonApplicationData%\OPC Foundation\CertificateStores\RejectedCertificates" },
@@ -123,10 +233,10 @@ public class OPC_UA_Client : MonoBehaviour
         return config;
     }
 
-    class OPC_Ua_Client_Read_Data_Cls
+    class OPC_UA_Client_Read_Data_Cls
     {
         // Initialization of the class variables.
-        private Thread opcua_thread = null;
+        private Thread ctrl_thread = null;
         private bool exit_thread = false;
         // OPC UA client app. configuration class.
         ApplicationConfiguration app_configuration = new ApplicationConfiguration();
@@ -154,6 +264,7 @@ public class OPC_UA_Client : MonoBehaviour
                     Description:
                         Block used to read data from the server via the OPC UA communication.
                     */
+                    G_OPC_UA_Client_General_Data_Str.Simulation_Enabled = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_General_Data_Str.Simulation_Enabled_Node).ToString());
 
                     // t_{1}: Timer stop.
                     t.Stop();
@@ -178,28 +289,37 @@ public class OPC_UA_Client : MonoBehaviour
         {
             exit_thread = false;
             // Start a thread to read data from the OPC UA server.
-            opcua_thread = new Thread(new ThreadStart(Cls_Core_Thread));
-            opcua_thread.IsBackground = true;
-            opcua_thread.Start();
+            ctrl_thread = new Thread(new ThreadStart(Cls_Core_Thread));
+            ctrl_thread.IsBackground = true;
+            ctrl_thread.Start();
+
+            // The thread is active.
+            opc_ua_client_r_is_alive = true;
         }
+
         public void Stop()
         {
             exit_thread = true;
+            ctrl_thread.Abort();
             // Stop a thread.
             Thread.Sleep(100);
+
+            // The thread is inactive.
+            opc_ua_client_r_is_alive = false;
         }
+
         public void Destroy()
         {
-            // Stop a thread (OPCUA communication).
+            // Stop a thread (OPC UA communication).
             Stop();
             Thread.Sleep(100);
         }
     }
 
-    class OPC_Ua_Client_Write_Data_Cls
+    class OPC_UA_Client_Write_Data_Cls
     {
         // Initialization of the class variables.
-        private Thread opcua_thread = null;
+        private Thread ctrl_thread = null;
         private bool exit_thread = false;
         // OPC UA client app. configuration class.
         ApplicationConfiguration app_configuration = new ApplicationConfiguration();
@@ -227,6 +347,9 @@ public class OPC_UA_Client : MonoBehaviour
                     Description:
                         Block used to write data to the server via the OPC UA communication.
                     */
+                    if(G_OPC_UA_Client_General_Data_Str.Simulation_Enabled == true){
+                        // ....
+                    }
 
                     // t_{1}: Timer stop.
                     t.Stop();
@@ -288,16 +411,25 @@ public class OPC_UA_Client : MonoBehaviour
         {
             exit_thread = false;
             // Start a thread to write data to the OPC UA server.
-            opcua_thread = new Thread(new ThreadStart(Cls_Core_Thread));
-            opcua_thread.IsBackground = true;
-            opcua_thread.Start();
+            ctrl_thread = new Thread(new ThreadStart(Cls_Core_Thread));
+            ctrl_thread.IsBackground = true;
+            ctrl_thread.Start();
+
+            // The thread is active.
+            opc_ua_client_w_is_alive = true;
         }
+
         public void Stop()
         {
             exit_thread = true;
+            ctrl_thread.Abort();
             // Stop a thread.
             Thread.Sleep(100);
+
+            // The thread is inactive.
+            opc_ua_client_w_is_alive = false;
         }
+
         public void Destroy()
         {
             // Stop a thread (OPC UA communication).
