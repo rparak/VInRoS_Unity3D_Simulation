@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using System.Collections;
 using System.Diagnostics;
+using System.Linq;
 // Unity 
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -12,6 +13,7 @@ using Opc.Ua.Client;
 using Opc.Ua.Configuration;
 
 using static User_Interface;
+using static SMC_LEFB25_14000;
 
 /*
 Description:
@@ -63,6 +65,7 @@ public class OPC_UA_Client : MonoBehaviour
         public static bool Simulation_Enabled;
     }
 
+
     public static class G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str
     {
         /*
@@ -75,7 +78,6 @@ public class OPC_UA_Client : MonoBehaviour
             The process used to read the data requires a variable that corresponds 
             to the data type used in the OPC UA server.
         */
-
         public static NodeId[] Start_Node = new NodeId[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Command.Start",
                                                           "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Command.Start"};
         public static bool[] Start = new bool[2];
@@ -85,12 +87,12 @@ public class OPC_UA_Client : MonoBehaviour
         public static NodeId[] Home_Node = new NodeId[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Command.Home",
                                                          "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Command.Home"};
         public static bool[] Home = new bool[2];
-        public static NodeId[] Trajectory_Node = new NodeId[2]{"ns=6;s=::T_MECH_1.Trajectory_Str.Targets.Position",
-                                                               "ns=6;s=::T_MECH_2.Trajectory_Str.Targets.Position"};
+        public static NodeId[] Trajectory_Node = new NodeId[2]{"ns=6;s=::T_MECH_1:Trajectory_Str.Targets.Position",
+                                                               "ns=6;s=::T_MECH_2:Trajectory_Str.Targets.Position"};
         public static float[,] Trajectory = new float[100,2];
-        public static NodeId[] Trajectory_Length_Node = new NodeId[2]{"ns=6;s=::T_MECH_1.Trajectory_Str.Length",
-                                                                      "ns=6;s=::T_MECH_2.Trajectory_Str.Length"};
-        public static byte Trajectory_Length;
+        public static NodeId[] Trajectory_Length_Node = new NodeId[2]{"ns=6;s=::T_MECH_1:Trajectory_Str.Length",
+                                                                      "ns=6;s=::T_MECH_2:Trajectory_Str.Length"};
+        public static byte[] Trajectory_Length = new byte[2];
 
         /*
         Description:
@@ -99,6 +101,12 @@ public class OPC_UA_Client : MonoBehaviour
             Note:
                 Use node as a string data type.
         */
+        public static string[] Active_Node = new string[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Info.Active",
+                                                           "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Info.Active"};
+        public static bool[] Active = new bool[2];
+        public static string[] Move_Active_Node = new string[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Info.Move_Active",
+                                                                "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Info.Move_Active"};
+        public static bool[] Move_Active = new bool[2];
         public static string[] Q_actual_Node = new string[2]{"ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Position",
                                                              "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_2.Position"};
     }
@@ -147,6 +155,8 @@ public class OPC_UA_Client : MonoBehaviour
         switch(state_id){
             case OPC_UA_Client_STATE_Enum.DISCONNECTED:
             {
+                G_OPC_UA_Client_Str.Ip_Address = User_Interface.G_UI_Str.Ip_Address;
+
                 G_OPC_UA_Client_Str.Is_Connected = false;
                 if(User_Interface.G_UI_Str.Connect == true){
                     OPC_UA_Client_R_Cls.Start(); OPC_UA_Client_W_Cls.Start();
@@ -264,7 +274,25 @@ public class OPC_UA_Client : MonoBehaviour
                     Description:
                         Block used to read data from the server via the OPC UA communication.
                     */
+
+                    // General data obtained from the server.
                     G_OPC_UA_Client_General_Data_Str.Simulation_Enabled = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_General_Data_Str.Simulation_Enabled_Node).ToString());
+
+                    // Data to control the SMC LEFB25UNZS 14000C mechanism for both axes ID 1 and ID 2 obtained from the server.
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start[0] = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start_Node[0]).ToString());
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start[1] = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start_Node[1]).ToString());
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop[0]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop_Node[0]).ToString());
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop[1]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop_Node[1]).ToString());
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[0]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home_Node[0]).ToString());
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[1]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home_Node[1]).ToString());
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length[0] = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length_Node[0]).ToString());
+                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length[1] = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length_Node[1]).ToString());
+                    float[] t_mech_id_1 = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Node[0]).ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                    StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                    float[] t_mech_id_2 = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Node[1]).ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                    StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                    Enumerable.Range(0, t_mech_id_1.Length).ToList().ForEach(i => { G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory[i, 0] = t_mech_id_1[i]; 
+                                                                                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory[i, 1] = t_mech_id_2[i]; });
 
                     // t_{1}: Timer stop.
                     t.Stop();
@@ -348,7 +376,20 @@ public class OPC_UA_Client : MonoBehaviour
                         Block used to write data to the server via the OPC UA communication.
                     */
                     if(G_OPC_UA_Client_General_Data_Str.Simulation_Enabled == true){
-                        // ....
+                        // Information data about the SMC LEFB25UNZS 14000C mechanism for both axes ID 1 and ID 2 transmitted to the server.
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Active_Node[0],
+                                                  G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Active[0].ToString());
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Active_Node[1],
+                                                  G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Active[1].ToString());
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active_Node[0],
+                                                  G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[0].ToString());
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active_Node[1],
+                                                  G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[1].ToString());
+                        // The actual position of the SMC LEFB25UNZS 14000C mechanism for both axes ID 1 and ID 2 transmitted to the server.
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Q_actual_Node[0], 
+                                                  SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[0].ToString());
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Q_actual_Node[1], 
+                                                  SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[1].ToString());
                     }
 
                     // t_{1}: Timer stop.
