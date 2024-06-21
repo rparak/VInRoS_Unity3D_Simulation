@@ -9,6 +9,11 @@ using UnityEngine.UI;
 using TMPro;
 
 using static OPC_UA_Client;
+using static SMC_LEFB25_14000;
+using static SMC_LEJSH63NZA_800;
+using static ABB_IRB_120;
+using static ABB_IRB_14000_L;
+using static ABB_IRB_14000_R;
 
 public class User_Interface : MonoBehaviour
 {
@@ -38,7 +43,7 @@ public class User_Interface : MonoBehaviour
     // GameObject
     public GameObject Camera_Obj;
     public GameObject ABB_IRB_120_L_Ax_Obj; public GameObject ABB_IRB_14000_Obj;
-    public GameObject SMC_LEFB25_14000;
+    public GameObject SMC_LEFB25_14000_Obj;
     // TextMeshProUGUI
     public TextMeshProUGUI Connection_Info_Txt;
     public TextMeshProUGUI[] SMC_LEFB25_14000_Txt = new TextMeshProUGUI[2];
@@ -88,11 +93,16 @@ public class User_Interface : MonoBehaviour
         }
 
         // Data Information about the robot/mechanism's joint positions within a specific panel.
-        SMC_LEFB25_14000_Txt[0].text = "0.0"; SMC_LEFB25_14000_Txt[1].text = "0.0";
-        for(int i = 0; i < ABB_IRB_120_L_Ax_Txt.Length; i++) 
+        SMC_LEFB25_14000_Txt[0].text = SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[0].ToString(); 
+        SMC_LEFB25_14000_Txt[1].text = SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[1].ToString();
+        ABB_IRB_120_L_Ax_Txt[0].text = SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual.ToString(); 
+        for(int i = 0; i < ABB_IRB_14000_L_Txt.Length; i++) 
         {
-            ABB_IRB_120_L_Ax_Txt[i].text = "0.0"; ABB_IRB_14000_L_Txt[i].text = "0.0";
-            ABB_IRB_14000_R_Txt[i].text = "0.0";
+            if(i > 0){
+                ABB_IRB_120_L_Ax_Txt[i].text = ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual[i - 1].ToString(); 
+            }
+            ABB_IRB_14000_L_Txt[i].text = ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[i].ToString(); 
+            ABB_IRB_14000_R_Txt[i].text = ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[i].ToString(); 
         }
     }
 
@@ -118,17 +128,17 @@ public class User_Interface : MonoBehaviour
         }
 
         // Mechanism: SMC LEFB25UNZS 14000C.
-        Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Viewpoint_EE_" + SMC_LEFB25_14000.name + "_ID_001").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
-        Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Viewpoint_EE_" + SMC_LEFB25_14000.name + "_ID_002").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
+        Get_Child_Game_Object(SMC_LEFB25_14000_Obj.transform, "Viewpoint_EE_" + SMC_LEFB25_14000_Obj.name + "_ID_001").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
+        Get_Child_Game_Object(SMC_LEFB25_14000_Obj.transform, "Viewpoint_EE_" + SMC_LEFB25_14000_Obj.name + "_ID_002").SetActive(SMC_LEFB25_14000_Toggle[0].isOn);
         string[] mechanism_object_types = {"Collider", "Ghost"}; int[] mechanism_id = {1, 2};
         var i = 1;
         foreach(string mech_obj_type in mechanism_object_types){
             foreach(int mech_id in mechanism_id){
                 if(mech_obj_type == "Collider"){
-                    Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Base_" + mech_obj_type + "_" + SMC_LEFB25_14000.name + "_ID_00" + mech_id).SetActive(SMC_LEFB25_14000_Toggle[i].isOn);
+                    Get_Child_Game_Object(SMC_LEFB25_14000_Obj.transform, "Base_" + mech_obj_type + "_" + SMC_LEFB25_14000_Obj.name + "_ID_00" + mech_id).SetActive(SMC_LEFB25_14000_Toggle[i].isOn);
                 }
-                Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Joint_L_" + mech_obj_type + "_" +SMC_LEFB25_14000.name + "_ID_00" + mech_id).SetActive(SMC_LEFB25_14000_Toggle[i].isOn);
-                Get_Child_Game_Object(SMC_LEFB25_14000.transform, "Shuttle_" + mech_obj_type + "_" + SMC_LEFB25_14000.name + "_ID_00" + mech_id).SetActive(SMC_LEFB25_14000_Toggle[i].isOn);
+                Get_Child_Game_Object(SMC_LEFB25_14000_Obj.transform, "Joint_L_" + mech_obj_type + "_" + SMC_LEFB25_14000_Obj.name + "_ID_00" + mech_id).SetActive(SMC_LEFB25_14000_Toggle[i].isOn);
+                Get_Child_Game_Object(SMC_LEFB25_14000_Obj.transform, "Shuttle_" + mech_obj_type + "_" + SMC_LEFB25_14000_Obj.name + "_ID_00" + mech_id).SetActive(SMC_LEFB25_14000_Toggle[i].isOn);
             }
             i++;
         }
@@ -166,6 +176,19 @@ public class User_Interface : MonoBehaviour
         }
         Get_Child_Game_Object(ABB_IRB_14000_Obj.transform, "Workspace_" + ABB_IRB_14000_Obj.name + "_R_ID_001").SetActive(ABB_IRB_14000_Toggle[3].isOn);
         Get_Child_Game_Object(ABB_IRB_14000_Obj.transform, "Workspace_" + ABB_IRB_14000_Obj.name + "_L_ID_001").SetActive(ABB_IRB_14000_Toggle[3].isOn);
+
+        // Data Information about the robot/mechanism's joint positions.
+        SMC_LEFB25_14000_Txt[0].text = Math.Round(SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[0], 2).ToString(); 
+        SMC_LEFB25_14000_Txt[1].text = Math.Round(SMC_LEFB25_14000.G_SMC_LEFB25_14000_Str.Q_actual[1], 2).ToString();
+        ABB_IRB_120_L_Ax_Txt[0].text = Math.Round(SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual, 2).ToString(); 
+        for(int j = 0; j < ABB_IRB_14000_L_Txt.Length; j++) 
+        {
+            if(j > 0){
+                ABB_IRB_120_L_Ax_Txt[j].text = Math.Round(ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual[j - 1], 2).ToString(); 
+            }
+            ABB_IRB_14000_L_Txt[j].text = Math.Round(ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[j], 2).ToString(); 
+            ABB_IRB_14000_R_Txt[j].text = Math.Round(ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[j], 2).ToString(); 
+        }
     }
 
     /*

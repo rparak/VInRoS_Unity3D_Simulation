@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-using static ABB_IRB_120_L_Ax;
+using static ABB_IRB_120;
 
 public class Rob_ID_1_Revolute_Joint_Control_Ghost : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class Rob_ID_1_Revolute_Joint_Control_Ghost : MonoBehaviour
     */
     void Update()
     {
-        transform.localEulerAngles = new Vector3(Q_0[0], Q_0[1], Q_0[2] + ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index]*conversion_value);
+        transform.localEulerAngles = new Vector3(Q_0[0], Q_0[1], Q_0[2] + ABB_IRB_120.G_ABB_IRB_120_Str.Q_target[index]*conversion_value);
     }
 
     /*

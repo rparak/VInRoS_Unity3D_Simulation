@@ -5,17 +5,15 @@ using System.Text;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-using static ABB_IRB_120_L_Ax;
+using static SMC_LEJSH63NZA_800;
 
-public class Rob_ID_1_Prismatic_Joint_Control_Ghost : MonoBehaviour
+public class Mech_ID_3_Prismatic_Joint_Control_Ghost : MonoBehaviour
 {
     /*
     Description:
         Public variables.
     */
     public const float conversion_value = 0.00001f;
-    // Index of the global variable used to control a specific joint.
-    public int index;
 
     /*
     Description:
@@ -39,7 +37,7 @@ public class Rob_ID_1_Prismatic_Joint_Control_Ghost : MonoBehaviour
     */
     void Update()
     {
-        transform.localPosition = new Vector3(Q_0[0] + ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index]*conversion_value, Q_0[1], Q_0[2]);
+        transform.localPosition = new Vector3(Q_0[0] + SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target*conversion_value, Q_0[1], Q_0[2]);
     }
 
     /*

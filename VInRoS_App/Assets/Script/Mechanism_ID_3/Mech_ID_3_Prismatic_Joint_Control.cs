@@ -5,17 +5,15 @@ using System.Text;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-using static ABB_IRB_120_L_Ax;
+using static SMC_LEJSH63NZA_800;
 
-public class Rob_ID_1_Prismatic_Joint_Control : MonoBehaviour
+public class Mech_ID_3_Prismatic_Joint_Control : MonoBehaviour
 {
     /*
     Description:
         Public variables.
     */
     public const float conversion_value = 0.00001f;
-    // Index of the global variable used to control a specific joint.
-    public int index;
 
     /*
     Description:
@@ -37,7 +35,7 @@ public class Rob_ID_1_Prismatic_Joint_Control : MonoBehaviour
     */
     void Start()
     {
-        Q_0 = transform.localPosition; ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = false;
+        Q_0 = transform.localPosition; SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.In_Position = false;
     }
 
     /*
@@ -47,17 +45,17 @@ public class Rob_ID_1_Prismatic_Joint_Control : MonoBehaviour
     void Update()
     {
         // Smooth movement of the current mechanism position to the target position.
-        ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index] = Mathf.SmoothDamp(ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index], 
-                                                                                   ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index], 
+        SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual = Mathf.SmoothDamp(SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual, 
+                                                                                   SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target, 
                                                                                    ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
-        if(Mathf.Abs(ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index] - ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index]) <= tolerance){
-            ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index] = ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index]; v = 0.0f;
-            ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = true;
+        if(Mathf.Abs(SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target - SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual) <= tolerance){
+            SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual = SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target; v = 0.0f;
+            SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.In_Position = true;
         }else{
-            ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = false;
+            SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.In_Position= false;
         }
 
-        transform.localPosition = new Vector3(Q_0[0] + ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index]*conversion_value, Q_0[1], Q_0[2]);
+        transform.localPosition = new Vector3(Q_0[0] + SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual*conversion_value, Q_0[1], Q_0[2]);
     }
 
     /*

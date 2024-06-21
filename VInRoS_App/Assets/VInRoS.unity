@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.0110179, g: 0.9258462, b: 1.1107562, a: 1}
+  m_IndirectSpecularColor: {r: 1.0111767, g: 0.9259521, b: 1.1108342, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12124,7 +12124,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SMC LEJSH63NZA - 800
+  m_text: 'SMC LEJSH63NZA - 800
+
+    ID: 3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -43858,7 +43860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daadc3e6382fc4f279435962675e9c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 3
+  index: 2
 --- !u!23 &3811611069061554997
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -47862,7 +47864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ad2a975a8b784f1aae9f326d18afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 1
+  index: 0
 --- !u!4 &5323145853686740138
 Transform:
   m_ObjectHideFlags: 0
@@ -47982,7 +47984,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5352097091670845290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62260012adc99ccf4a6516b219c39d85, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ab2d65ff5d5e2e1db4b39352c07fa89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   index: 1
@@ -48201,7 +48203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ad2a975a8b784f1aae9f326d18afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 2
+  index: 1
 --- !u!33 &5465665837067347985
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -49081,7 +49083,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5872073737811205696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da616af4dc54b5eb594bb395326cbade, type: 3}
+  m_Script: {fileID: 11500000, guid: f044ba082905c298db2f36254799c3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   index: 1
@@ -49432,7 +49434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daadc3e6382fc4f279435962675e9c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 1
+  index: 0
 --- !u!4 &6051579247602548586
 Transform:
   m_ObjectHideFlags: 0
@@ -51945,10 +51947,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2818458677341256209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546b7c29dfcf6d6fea36fc27a4926e1c, type: 3}
+  m_Script: {fileID: 11500000, guid: d80754a5ac0371a66b46f874c09078bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
 --- !u!23 &6816080771884406533
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -52048,6 +52049,7 @@ GameObject:
   - component: {fileID: 6171578883982473656}
   - component: {fileID: 7064461021382751773}
   - component: {fileID: 5039236162666644183}
+  - component: {fileID: 7064461021382751775}
   - component: {fileID: 7064461021382751774}
   m_Layer: 0
   m_Name: ABB_IRB_120_L_Ax
@@ -52821,7 +52823,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6840416873182651138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d665c16716429ab9b807b3ea8d4711c, type: 3}
+  m_Script: {fileID: 11500000, guid: a8044bc171a29b7bc8ab0e4359c147af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7064461021382751775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6840416873182651138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1660ea80bbba341968355c55bba1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!33 &7064736248807943221
@@ -53464,7 +53478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ad2a975a8b784f1aae9f326d18afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 4
+  index: 3
 --- !u!23 &7278570648217617609
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -53606,7 +53620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ad2a975a8b784f1aae9f326d18afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 6
+  index: 5
 --- !u!23 &7378929699867436167
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -53793,7 +53807,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7436969373086588919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62260012adc99ccf4a6516b219c39d85, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ab2d65ff5d5e2e1db4b39352c07fa89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
@@ -54768,7 +54782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ad2a975a8b784f1aae9f326d18afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 3
+  index: 2
 --- !u!23 &7778757591761836910
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -55174,7 +55188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daadc3e6382fc4f279435962675e9c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 5
+  index: 4
 --- !u!4 &7902152162477379615
 Transform:
   m_ObjectHideFlags: 0
@@ -55278,7 +55292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daadc3e6382fc4f279435962675e9c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 6
+  index: 5
 --- !u!33 &7934365885095320740
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -55514,7 +55528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daadc3e6382fc4f279435962675e9c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 4
+  index: 3
 --- !u!4 &8000976325637907398
 Transform:
   m_ObjectHideFlags: 0
@@ -57255,10 +57269,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8578645897210209540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe7371f3f3d314481bd64c4fa322c8ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ebc73aa50f2579798c51e540d2fdc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
 --- !u!4 &8591794756366054318
 Transform:
   m_ObjectHideFlags: 0
@@ -57938,7 +57951,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8764306509639964249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da616af4dc54b5eb594bb395326cbade, type: 3}
+  m_Script: {fileID: 11500000, guid: f044ba082905c298db2f36254799c3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
@@ -58052,7 +58065,7 @@ MonoBehaviour:
   Camera_Obj: {fileID: 1823688464}
   ABB_IRB_120_L_Ax_Obj: {fileID: 6840416873182651138}
   ABB_IRB_14000_Obj: {fileID: 4111214095258201529}
-  SMC_LEFB25_14000: {fileID: 2337730324671831206}
+  SMC_LEFB25_14000_Obj: {fileID: 2337730324671831206}
   Connection_Info_Txt: {fileID: 8793931639701857263}
   SMC_LEFB25_14000_Txt:
   - {fileID: 2057373698}
@@ -59299,7 +59312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daadc3e6382fc4f279435962675e9c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 2
+  index: 1
 --- !u!1 &9065318837784708096
 GameObject:
   m_ObjectHideFlags: 0
@@ -59549,7 +59562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ad2a975a8b784f1aae9f326d18afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 5
+  index: 4
 --- !u!33 &9139925680566997853
 MeshFilter:
   m_ObjectHideFlags: 0

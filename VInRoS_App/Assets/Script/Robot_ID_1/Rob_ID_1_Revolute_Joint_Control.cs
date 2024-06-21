@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-using static ABB_IRB_120_L_Ax;
+using static ABB_IRB_120;
 
 public class Rob_ID_1_Revolute_Joint_Control : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class Rob_ID_1_Revolute_Joint_Control : MonoBehaviour
     */
     void Start()
     {
-        Q_0 = transform.localEulerAngles; ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = false;
+        Q_0 = transform.localEulerAngles; ABB_IRB_120.G_ABB_IRB_120_Str.In_Position[index] = false;
     }
 
     /*
@@ -47,17 +47,17 @@ public class Rob_ID_1_Revolute_Joint_Control : MonoBehaviour
     void Update()
     {
         // Smooth movement of the current robot position to the target position.
-        ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index] = Mathf.SmoothDamp(ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index], 
-                                                                                   ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index], 
+        ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual[index] = Mathf.SmoothDamp(ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual[index], 
+                                                                                   ABB_IRB_120.G_ABB_IRB_120_Str.Q_target[index], 
                                                                                    ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
-        if(Mathf.Abs(ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index] - ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index]) <= tolerance){
-            ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index] = ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_target[index]; v = 0.0f;
-            ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = true;
+        if(Mathf.Abs(ABB_IRB_120.G_ABB_IRB_120_Str.Q_target[index] - ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual[index]) <= tolerance){
+            ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual[index] = ABB_IRB_120.G_ABB_IRB_120_Str.Q_target[index]; v = 0.0f;
+            ABB_IRB_120.G_ABB_IRB_120_Str.In_Position[index] = true;
         }else{
-            ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.In_Position[index] = false;
+            ABB_IRB_120.G_ABB_IRB_120_Str.In_Position[index] = false;
         }
 
-        transform.localEulerAngles = new Vector3(Q_0[0], Q_0[1], Q_0[2] + ABB_IRB_120_L_Ax.G_ABB_IRB_120_L_Ax_Str.Q_actual[index]*conversion_value);
+        transform.localEulerAngles = new Vector3(Q_0[0], Q_0[1], Q_0[2] + ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual[index]*conversion_value);
     }
 
     /*

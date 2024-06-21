@@ -9,7 +9,7 @@ using static OPC_UA_Client;
 
 /*
 Description:
-    Mechanism Type - SMC LEFB25UNZS 14000C
+    Mechanism Type - SMC Linear Axis LEFB25UNZS 14000C
         Absolute Joint Position: 
             Joint L: [0.0, 1.4] [m]
 */
@@ -104,12 +104,12 @@ public class SMC_LEFB25_14000 : MonoBehaviour
     public void Control_Mechanism(int mech_id){
         /*
         Description:
-            A state machine used to control a mechanism with identification number <mech_id>.
+            The state machine used to control the mechanism with identification number <mech_id>.
         */
         switch(state_id[mech_id]){
             case SMC_LEFB25_14000_STATE_Enum.INIT:
             {
-                G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Active[mech_id] = true;
+                OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Active[mech_id] = true;
 
                 if(OPC_UA_Client.G_OPC_UA_Client_Str.Is_Connected == true && G_OPC_UA_Client_General_Data_Str.Simulation_Enabled == true){
                     state_id[mech_id] = SMC_LEFB25_14000_STATE_Enum.WAIT_COMMAND;
@@ -119,7 +119,7 @@ public class SMC_LEFB25_14000 : MonoBehaviour
 
             case SMC_LEFB25_14000_STATE_Enum.WAIT_COMMAND:
             {
-                G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[mech_id] = false;
+                OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[mech_id] = false;
 
                 if(OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[mech_id] == true){
                     state_id[mech_id] = SMC_LEFB25_14000_STATE_Enum.HOME_INIT;
@@ -133,8 +133,6 @@ public class SMC_LEFB25_14000 : MonoBehaviour
 
             case SMC_LEFB25_14000_STATE_Enum.HOME_INIT:
             {
-                G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[mech_id] = true;
-
                 // Set the target position of the mechanism to the home position.
                 //  Note:
                 //      Check that the desired absolute joint positions are not out of limit.
@@ -146,6 +144,8 @@ public class SMC_LEFB25_14000 : MonoBehaviour
 
             case SMC_LEFB25_14000_STATE_Enum.HOME_PERFORM:
             {
+                OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[mech_id] = true;
+
                 if(G_SMC_LEFB25_14000_Str.In_Position[mech_id] == true){
                     state_id[mech_id] = SMC_LEFB25_14000_STATE_Enum.WAIT_COMMAND;
                 }
@@ -154,8 +154,6 @@ public class SMC_LEFB25_14000 : MonoBehaviour
 
             case SMC_LEFB25_14000_STATE_Enum.MOVE_CHECK:
             {
-                G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[mech_id] = true;
-
                 if(t_index[mech_id] == OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length[mech_id]){
                     t_index[mech_id] = 0;
                 }
@@ -179,6 +177,8 @@ public class SMC_LEFB25_14000 : MonoBehaviour
 
             case SMC_LEFB25_14000_STATE_Enum.MOVE_PERFORM:
             {
+                OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Move_Active[mech_id] = true;
+                
                 if(OPC_UA_Client.G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop[mech_id] == true){
                     t_index[mech_id] = 0;
                     state_id[mech_id] = SMC_LEFB25_14000_STATE_Enum.WAIT_COMMAND;
