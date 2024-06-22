@@ -40,17 +40,12 @@ public class SMC_LEJSH63NZA_800 : MonoBehaviour
 
     /*
     Description:
-        Global variables.
-    */
-    private SMC_LEJSH63NZA_800_STATE_Enum state_id;
-    private int t_index;
-
-    /*
-    Description:
         Private variables.
     */
     private readonly float Q_home = 400.0f;
     private readonly float[] Q_limit = new float[2] {0.0f, 800.0f};
+    private SMC_LEJSH63NZA_800_STATE_Enum state_id;
+    private int t_index;
 
     /*
     Description:
@@ -71,7 +66,10 @@ public class SMC_LEJSH63NZA_800 : MonoBehaviour
     */
     void Update()
     {
-        // The state machine used to control the mechanism, specifically the 7th linear axis of the ABB IRB 120 industrial robot.
+        /*
+        Description:
+            The state machine used to control the mechanism, specifically the 7th linear axis of the ABB IRB 120 industrial robot.
+        */
         switch(state_id){
             case SMC_LEJSH63NZA_800_STATE_Enum.INIT:
             {

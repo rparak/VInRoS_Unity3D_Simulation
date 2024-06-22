@@ -142,6 +142,94 @@ public class OPC_UA_Client : MonoBehaviour
         public static string Q_actual_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Mech_Id_3.Position";
     }
 
+    public static class G_OPC_UA_Client_IRB_120_Data_Str
+    {
+        /*
+        Description:
+            Variables used to read data from the client.
+        */
+
+        public static NodeId Start_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Command.Start";
+        public static bool Start;
+        public static NodeId Stop_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Command.Stop";
+        public static bool Stop;
+        public static NodeId Home_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Command.Home";
+        public static bool Home;
+        public static NodeId Trajectory_Node = "ns=6;s=::T_ROB_1:Trajectory_Str.Targets.Joint";
+        public static float[,] Trajectory = new float[100,7];
+        public static NodeId Trajectory_Length_Node = "ns=6;s=::T_ROB_1:Trajectory_Str.Length";
+        public static byte Trajectory_Length;
+
+        /*
+        Description:
+            Variables used to write data to the client.
+        */
+        public static string Active_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Info.Active";
+        public static bool Active;
+        public static string Move_Active_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Info.Move_Active";
+        public static bool Move_Active;
+        public static string Q_actual_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q";
+
+    }
+
+    public static class G_OPC_UA_Client_IRB_14000_L_Data_Str
+    {
+        /*
+        Description:
+            Variables used to read data from the client.
+        */
+
+        public static NodeId Start_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Command.Start";
+        public static bool Start;
+        public static NodeId Stop_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Command.Stop";
+        public static bool Stop;
+        public static NodeId Home_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Command.Home";
+        public static bool Home;
+        public static NodeId Trajectory_Node = "ns=6;s=::T_ROB_2_L:Trajectory_Str.Targets.Joint";
+        public static float[,] Trajectory = new float[100,7];
+        public static NodeId Trajectory_Length_Node = "ns=6;s=::T_ROB_2_L:Trajectory_Str.Length";
+        public static byte Trajectory_Length;
+
+        /*
+        Description:
+            Variables used to write data to the client.
+        */
+        public static string Active_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Info.Active";
+        public static bool Active;
+        public static string Move_Active_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Info.Move_Active";
+        public static bool Move_Active;
+        public static string Q_actual_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Position.Q";
+    }
+
+    public static class G_OPC_UA_Client_IRB_14000_R_Data_Str
+    {
+        /*
+        Description:
+            Variables used to read data from the client.
+        */
+
+        public static NodeId Start_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Command.Start";
+        public static bool Start;
+        public static NodeId Stop_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Command.Stop";
+        public static bool Stop;
+        public static NodeId Home_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Command.Home";
+        public static bool Home;
+        public static NodeId Trajectory_Node = "ns=6;s=::T_ROB_2_R:Trajectory_Str.Targets.Joint";
+        public static float[,] Trajectory = new float[100,7];
+        public static NodeId Trajectory_Length_Node = "ns=6;s=::T_ROB_2_R:Trajectory_Str.Length";
+        public static byte Trajectory_Length;
+
+        /*
+        Description:
+            Variables used to write data to the client.
+        */
+        public static string Active_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Info.Active";
+        public static bool Active;
+        public static string Move_Active_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active";
+        public static bool Move_Active;
+        public static string Q_actual_Node = "ns=6;s=::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Position.Q";
+    }
+
     /*
     Description:
         Global variables.
@@ -299,39 +387,86 @@ public class OPC_UA_Client : MonoBehaviour
                     // General data obtained from the server.
                     G_OPC_UA_Client_General_Data_Str.Simulation_Enabled = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_General_Data_Str.Simulation_Enabled_Node).ToString());
 
-                    /*
-                    Description:
-                        SMC Linear Axis LEFB25UNZS 14000C.
-                    */
-                    // Data to control the SMC LEFB25UNZS 14000C mechanism for both axes ID 1 and ID 2 obtained from the server.
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start[0] = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start_Node[0]).ToString());
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start[1] = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start_Node[1]).ToString());
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop[0]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop_Node[0]).ToString());
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop[1]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop_Node[1]).ToString());
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[0]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home_Node[0]).ToString());
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[1]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home_Node[1]).ToString());
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length[0] = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length_Node[0]).ToString());
-                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length[1] = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length_Node[1]).ToString());
-                    float[] t_mech_id_1 = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Node[0]).ToString().Split(new[] { '{', '}', '|', }, 
-                                                                                    StringSplitOptions.RemoveEmptyEntries), float.Parse);
-                    float[] t_mech_id_2 = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Node[1]).ToString().Split(new[] { '{', '}', '|', }, 
-                                                                                    StringSplitOptions.RemoveEmptyEntries), float.Parse);
-                    Enumerable.Range(0, t_mech_id_1.Length).ToList().ForEach(i => { G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory[i, 0] = t_mech_id_1[i]; 
-                                                                                    G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory[i, 1] = t_mech_id_2[i]; });
+                    if(G_OPC_UA_Client_General_Data_Str.Simulation_Enabled == true){
+                        /*
+                        Description:
+                            SMC Linear Axis LEFB25UNZS 14000C.
+                        */
+                        // Data to control the SMC LEFB25UNZS 14000C mechanism for both axes ID 1 and ID 2 obtained from the server.
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start[0] = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start_Node[0]).ToString());
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start[1] = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Start_Node[1]).ToString());
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop[0]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop_Node[0]).ToString());
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop[1]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Stop_Node[1]).ToString());
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[0]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home_Node[0]).ToString());
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home[1]  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Home_Node[1]).ToString());
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length[0] = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length_Node[0]).ToString());
+                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length[1] = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Length_Node[1]).ToString());
+                        float[] t_mech_id_1 = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Node[0]).ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                        StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                        float[] t_mech_id_2 = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory_Node[1]).ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                        StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                        Enumerable.Range(0, t_mech_id_1.Length).ToList().ForEach(i => { G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory[i, 0] = t_mech_id_1[i]; 
+                                                                                        G_OPC_UA_Client_SMC_LEFB25_14000_Data_Str.Trajectory[i, 1] = t_mech_id_2[i]; });
 
-                    /*
-                    Description:
-                        SMC Linear Axis LEJSH63NZA 800.
-                    */
-                    // Data to control the SMC LEJSH63NZA 800 mechanism, specifically the 7th linear axis of the ABB IRB 120 
-                    // industrial robot obtained from the server.
-                    G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Start = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Start_Node).ToString());
-                    G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Stop  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Stop_Node).ToString());
-                    G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Home  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Home_Node).ToString());
-                    G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory_Length = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory_Length_Node).ToString());
-                    G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory_Node).ToString().Split(new[] { '{', '}', '|', }, 
-                                                                                              StringSplitOptions.RemoveEmptyEntries), float.Parse);
-                    
+                        /*
+                        Description:
+                            SMC Linear Axis LEJSH63NZA 800.
+                        */
+                        // Data to control the SMC LEJSH63NZA 800 mechanism, specifically the 7th linear axis of the ABB IRB 120 
+                        // industrial robot obtained from the server.
+                        G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Start = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Start_Node).ToString());
+                        G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Stop  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Stop_Node).ToString());
+                        G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Home  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Home_Node).ToString());
+                        G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory_Length = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory_Length_Node).ToString());
+                        G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Trajectory_Node).ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                                StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                        
+                        /*
+                        Description:
+                            Industrial Robot ABB IRB 120.
+                        */
+                        G_OPC_UA_Client_IRB_120_Data_Str.Start = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_120_Data_Str.Start_Node).ToString());
+                        G_OPC_UA_Client_IRB_120_Data_Str.Stop  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_120_Data_Str.Stop_Node).ToString());
+                        G_OPC_UA_Client_IRB_120_Data_Str.Home  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_120_Data_Str.Home_Node).ToString());
+                        G_OPC_UA_Client_IRB_120_Data_Str.Trajectory_Length = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_120_Data_Str.Trajectory_Length_Node).ToString());
+                        for(int i = 0; i < G_OPC_UA_Client_IRB_120_Data_Str.Trajectory_Length; i++){
+                            float[] Q_i = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_IRB_120_Data_Str.Trajectory_Node + "[" + i + "].Q").ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                    StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                            Buffer.BlockCopy(Q_i, 0, G_OPC_UA_Client_IRB_120_Data_Str.Trajectory, i * G_OPC_UA_Client_IRB_120_Data_Str.Trajectory.GetLength(1) * sizeof(float), 
+                                            Q_i.Length * sizeof(float));
+                        }
+
+                        /*
+                        Description:
+                            Collaborative Dual-Arm Robot ABB IRB 14000 (Left Hand).
+                        */
+                        G_OPC_UA_Client_IRB_14000_L_Data_Str.Start = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_L_Data_Str.Start_Node).ToString());
+                        G_OPC_UA_Client_IRB_14000_L_Data_Str.Stop  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_L_Data_Str.Stop_Node).ToString());
+                        G_OPC_UA_Client_IRB_14000_L_Data_Str.Home  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_L_Data_Str.Home_Node).ToString());
+                        G_OPC_UA_Client_IRB_14000_L_Data_Str.Trajectory_Length = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_L_Data_Str.Trajectory_Length_Node).ToString());
+                        for(int i = 0; i < G_OPC_UA_Client_IRB_14000_L_Data_Str.Trajectory_Length; i++){
+                            float[] Q_i = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_L_Data_Str.Trajectory_Node + "[" + i + "].Q").ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                    StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                            Buffer.BlockCopy(Q_i, 0, G_OPC_UA_Client_IRB_14000_L_Data_Str.Trajectory, i * G_OPC_UA_Client_IRB_14000_L_Data_Str.Trajectory.GetLength(1) * sizeof(float), 
+                                            Q_i.Length * sizeof(float));
+                        }
+
+                        /*
+                        Description:
+                            Collaborative Dual-Arm Robot ABB IRB 14000 (Right Hand).
+                        */
+                        G_OPC_UA_Client_IRB_14000_R_Data_Str.Start = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_R_Data_Str.Start_Node).ToString());
+                        G_OPC_UA_Client_IRB_14000_R_Data_Str.Stop  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_R_Data_Str.Stop_Node).ToString());
+                        G_OPC_UA_Client_IRB_14000_R_Data_Str.Home  = bool.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_R_Data_Str.Home_Node).ToString());
+                        G_OPC_UA_Client_IRB_14000_R_Data_Str.Trajectory_Length = byte.Parse(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_R_Data_Str.Trajectory_Length_Node).ToString());
+                        for(int i = 0; i < G_OPC_UA_Client_IRB_14000_R_Data_Str.Trajectory_Length; i++){
+                            float[] Q_i = Array.ConvertAll(client_session.ReadValue(G_OPC_UA_Client_IRB_14000_R_Data_Str.Trajectory_Node + "[" + i + "].Q").ToString().Split(new[] { '{', '}', '|', }, 
+                                                                                    StringSplitOptions.RemoveEmptyEntries), float.Parse);
+                            Buffer.BlockCopy(Q_i, 0, G_OPC_UA_Client_IRB_14000_R_Data_Str.Trajectory, i * G_OPC_UA_Client_IRB_14000_R_Data_Str.Trajectory.GetLength(1) * sizeof(float), 
+                                            Q_i.Length * sizeof(float));
+                        }
+                    }
+
                     // t_{1}: Timer stop.
                     t.Stop();
 
@@ -446,6 +581,57 @@ public class OPC_UA_Client : MonoBehaviour
                         // The actual position of the mechanism transmitted to the server.
                         OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_SMC_LEJSH63NZA_800_Data_Str.Q_actual_Node, 
                                                   SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual.ToString());
+
+                        /*
+                        Description:
+                            Industrial Robot ABB IRB 120.
+                        */
+                        // Information data about the industrial robot ABB IRB 120 transmitted to the server.
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_120_Data_Str.Active_Node,
+                                                  G_OPC_UA_Client_IRB_120_Data_Str.Active.ToString());
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_120_Data_Str.Move_Active_Node,
+                                                  G_OPC_UA_Client_IRB_120_Data_Str.Move_Active.ToString());
+                        // The actual position of the robot transmitted to the server.
+                        var i = 0;
+                        foreach (float Q_i in ABB_IRB_120.G_ABB_IRB_120_Str.Q_actual){
+                            OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_120_Data_Str.Q_actual_Node + "[" + i + "]", 
+                                                      Q_i.ToString());
+                            i++;
+                        }
+
+                        /*
+                        Description:
+                            Collaborative Dual-Arm Robot ABB IRB 14000 (Left Hand).
+                        */
+                        // Information data about the collaborative robot ABB IRB 14000 (Left Hand) transmitted to the server.
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_14000_L_Data_Str.Active_Node,
+                                                  G_OPC_UA_Client_IRB_14000_L_Data_Str.Active.ToString());
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_14000_L_Data_Str.Move_Active_Node,
+                                                  G_OPC_UA_Client_IRB_14000_L_Data_Str.Move_Active.ToString());
+                        // The actual position of the robot transmitted to the server.
+                        var j = 0;
+                        foreach (float Q_j in ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual){
+                            OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_14000_L_Data_Str.Q_actual_Node + "[" + j + "]", 
+                                                      Q_j.ToString());
+                            j++;
+                        }
+
+                        /*
+                        Description:
+                            Collaborative Dual-Arm Robot ABB IRB 14000 (Right Hand).
+                        */
+                        // Information data about the collaborative robot ABB IRB 14000 (Right Hand) transmitted to the server.
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_14000_R_Data_Str.Active_Node,
+                                                  G_OPC_UA_Client_IRB_14000_R_Data_Str.Active.ToString());
+                        OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_14000_R_Data_Str.Move_Active_Node,
+                                                  G_OPC_UA_Client_IRB_14000_R_Data_Str.Move_Active.ToString());
+                        // The actual position of the robot transmitted to the server.
+                        var k = 0;
+                        foreach (float Q_k in ABB_IRB_14000_R.G_ABB_IRB_14000_R_Str.Q_actual){
+                            OPC_UA_Client_Write_Value(client_session, G_OPC_UA_Client_IRB_14000_R_Data_Str.Q_actual_Node + "[" + k + "]", 
+                                                      Q_k.ToString());
+                            k++;
+                        }
                     }
 
                     // t_{1}: Timer stop.
