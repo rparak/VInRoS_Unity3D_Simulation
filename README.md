@@ -6,12 +6,12 @@
 
 ## Requirements:
 
-**Software:**
+**Software**
 ```bash
 Unity3D **** (LTS), B&R Automation Studio, Visual Studio 2019/2022
 ```
 
-**Supported on the following operating systems:**
+**Supported on the following operating systems**
 ```bash
 Universal Windows Platform, Android, Linux
 ```
@@ -27,6 +27,8 @@ Universal Windows Platform, Android, Linux
 ## Project Description
 
 Text ...
+
+## Application
 
 <p align="center">
 <img src="https://github.com/rparak/VInRoS_Unity3D_Simulation/blob/main/images/Unity3D_DT_2_a.png" width="800" height="450">
