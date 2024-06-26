@@ -33,7 +33,7 @@ Text ...
 </p>
 
 <p align="center">
-<img src="https://github.com/rparak/VInRoS_Unity3D_Simulation/blob/main/images/Unity3D_DT_2_a.png" width="800" height="450">
+<img src="https://github.com/rparak/VInRoS_Unity3D_Simulation/blob/main/images/Unity3D_DT_2_b.png" width="800" height="450">
 </p>
 
 ## Contact Info
