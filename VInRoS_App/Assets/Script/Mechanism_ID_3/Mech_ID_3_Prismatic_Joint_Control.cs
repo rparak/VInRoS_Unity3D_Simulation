@@ -45,14 +45,14 @@ public class Mech_ID_3_Prismatic_Joint_Control : MonoBehaviour
     void Update()
     {
         // Smooth movement of the current mechanism position to the target position.
-        SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual = Mathf.SmoothDamp(SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual, 
-                                                                                   SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target, 
-                                                                                   ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
         if(Mathf.Abs(SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target - SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual) <= tolerance){
-            SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual = SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target; v = 0.0f;
+            v = 0.0f;
             SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.In_Position = true;
         }else{
-            SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.In_Position= false;
+            SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual = Mathf.SmoothDamp(SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual, 
+                                                                                    SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_target, 
+                                                                                    ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
+            SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.In_Position = false;
         }
 
         transform.localPosition = new Vector3(Q_0[0] + SMC_LEJSH63NZA_800.G_SMC_LEJSH63NZA_800_Str.Q_actual*conversion_value, Q_0[1], Q_0[2]);

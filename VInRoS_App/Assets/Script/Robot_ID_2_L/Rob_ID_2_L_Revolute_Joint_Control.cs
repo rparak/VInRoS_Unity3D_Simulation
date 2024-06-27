@@ -47,13 +47,13 @@ public class Rob_ID_2_L_Revolute_Joint_Control : MonoBehaviour
     void Update()
     {
         // Smooth movement of the current robot position to the target position.
-        ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[index] = Mathf.SmoothDamp(ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[index], 
-                                                                                 ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_target[index], 
-                                                                                 ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
         if(Mathf.Abs(ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_target[index] - ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[index]) <= tolerance){
-            ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[index] = ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_target[index]; v = 0.0f;
+            v = 0.0f;
             ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.In_Position[index] = true;
         }else{
+            ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[index] = Mathf.SmoothDamp(ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_actual[index], 
+                                                                                     ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.Q_target[index], 
+                                                                                     ref v, t_smooth, Mathf.Infinity, Time.deltaTime);
             ABB_IRB_14000_L.G_ABB_IRB_14000_L_Str.In_Position[index] = false;
         }
 
