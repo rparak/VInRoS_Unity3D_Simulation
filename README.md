@@ -8,7 +8,7 @@
 
 **Software**
 ```bash
-Unity3D **** (LTS), B&R Automation Studio, Visual Studio 2019/2022
+Unity3D 2022.3.2f1 (LTS), B&R Automation Studio, Visual Studio 2019/2022
 ```
 
 **Supported on the following operating systems**
